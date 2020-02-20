@@ -1,0 +1,9 @@
+#give a name in the python formatted string format and specify the parameters and their types (sweep or case-by-case)
+
+name = Ec{0}_n0{1}_N{2}_test
+
+params{ 
+	Ec case
+	n0 sweep
+	N case
+}endparams
