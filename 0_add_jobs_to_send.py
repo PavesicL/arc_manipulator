@@ -65,6 +65,7 @@ for i in range(len(paramList)):
 	if paramList[i][1]=="sweep":
 		start, stop, step = casesList[i]
 		casesList[i] = np.arange(start, stop, step)
+		casesList[i] = [round(k, 8) for k in casesList[i]]
 
 #PRINT WHAT WE ARE DOING
 print("The sweep is over parameters: ")

@@ -33,7 +33,7 @@ def editInputFile(params, vals):
 					param = params[i]
 					val = vals[i]
 
-					if re.search("\s*"+param+"\s*=", line):
+					if re.search("\s+"+param+"\s*=", line):
 						newF.write("	"+param+" = {0}\n".format(val))
 						written=True
 
@@ -83,7 +83,7 @@ for jobname in failedJobs:
 
 	count += 1
 	os.system("echo {0} {1}".format(count, jobname))
-	#os.system("arcsub -c maister.hpc-rivr.um.si sendjob.xrsl")
+	os.system("arcsub -c maister.hpc-rivr.um.si sendjob.xrsl")
 
 print()
 
@@ -91,8 +91,6 @@ print("Resending vanished..")
 for jobname in vanishedJobs:
 
 	params, vals = nameToParamsVals(jobname, nameFile="nameFile")
-	print(jobname)
-	print(params, vals)
 	
 	editInputFile(params, vals)
 
@@ -108,7 +106,7 @@ for jobname in vanishedJobs:
 
 	count += 1
 	os.system("echo {0} {1}".format(count, jobname))
-	#os.system("arcsub -c maister.hpc-rivr.um.si sendjob.xrsl")
+	os.system("arcsub -c maister.hpc-rivr.um.si sendjob.xrsl")
 
 
 if count>0:

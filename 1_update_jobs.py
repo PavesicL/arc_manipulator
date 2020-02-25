@@ -43,7 +43,7 @@ with open("statJobs.txt", "r") as jobsF:
 				name = a.group(1)
 
 				allJobs.append([name])
-				allJobsToCompare.append([name])
+				allJobsToCompare.append(name)
 
 		if here==1:
 			a = re.search("State: (.*)", line)
