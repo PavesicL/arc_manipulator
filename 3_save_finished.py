@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 """
-Saves all finished jobs into the folder results, according to their job names.
+Saves all finished jobs into the folder /results, into subfolders named by the job names.
 """
 
 import os
 import sys
 import re
-import numpy as np
 
 #Allow usage of the -f switch
 try:

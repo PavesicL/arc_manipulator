@@ -6,8 +6,6 @@ Sends all jobs with status Failed or Vanished to the cluster.
 import os
 import sys
 import re
-import numpy as np
-import datetime
 from arc_functions import nameToParamsVals
 
 

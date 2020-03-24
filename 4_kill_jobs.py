@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 """
-Kill jobs with a certain status.
+Kill all jobs of the given batch with a given status. Kills either queing (-q), running (-r) or both (-a).
 """
 
 import os
 import sys
 import re
-import numpy as np
-import datetime
 
 if len(sys.argv) != 2:
 	print("Usage: " + sys.argv[0] + " status")
@@ -17,7 +15,7 @@ if len(sys.argv) != 2:
 
 #REFRESH THE job status files again
 print("Updating job statuses..")
-os.system("./1_update_jobs.py")
+os.system("1_update_jobs.py")
 print()
 
 killRunning, killQueueing = False, False
@@ -40,7 +38,7 @@ if killRunning:
 			countR+=1
 
 if killQueueing:
-	with open("queuingJobs.txt", "r") as runF:
+	with open("queingJobs.txt", "r") as runF:
 		for name in runF:
 			count+=1
 			print("{0}	{1}".format(count, name))

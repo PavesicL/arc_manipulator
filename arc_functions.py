@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 
+"""
+Functions used within the arc_manipulator scripts.
+"""
+
 import os
 import sys
 import re
-import numpy as np
 
 def readNameFile(file, regex=False):
 	"""
@@ -46,13 +49,11 @@ def readNameFile(file, regex=False):
 				paramsList.append([param, paramtype])
 
 	if regex:
-		regexname = re.sub("{[0-9]+}", "([0-9]+.*[0-9]*)", name)	#replace all instances of {number} in the name with ([0-9]+.*[0-9]*), which matches floats and ints
+		regexname = re.sub("{[0-9]+}", "(-*[0-9]+\.*[0-9]*)", name)	#replace all instances of {number} in the name with ([0-9]+.*[0-9]*), which matches floats and ints
 		return regexname, paramsList
 	
 	else:
 		return name, paramsList
-
-
 
 def nameToParamsVals(jobname, nameFile="nameFile"):
 	"""
@@ -78,6 +79,4 @@ def nameToParamsVals(jobname, nameFile="nameFile"):
 		params.append(param)
 		vals.append(val)		
 
-	return params, vals	
-
-
+	return params, vals

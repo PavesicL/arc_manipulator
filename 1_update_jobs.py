@@ -1,20 +1,12 @@
 #!/usr/bin/env python3
 """
-Updates the job statuses according to the arcstat output. Saves the names to accordingly named files.
+Reads the arcstat output and parses the jobs. Saves the data to .txt files by categories.
 """
 
 import os
 import sys
 import re
-import numpy as np
 from arc_functions import readNameFile
-
-"""
-EXAMPLE OF ARCSTAT OUTPUT
-Job: gsiftp://maister.hpc-rivr.um.si:2811/jobs/nhfKDm3ScCwnQ1W8MmmAVtPoemdcfmABFKDm3IFKDmABFKDmWjzENn
-Name: Ec1.1_n0800.7_gamma1.2
-State: Running
-"""
 
 #get a regex general form of the name
 regexName, _ = readNameFile("nameFile", regex=True)
@@ -24,9 +16,9 @@ f = open("jobsToSend.txt", "r")
 jobsToSend = [line.rstrip('\n') for line in f]	#strip the newline characters
 
 
-#SAVE THE INFORMATION ABOUT THE JOBS FROM THE CLUSTER TO statJobs.txt
+#SAVE THE INFORMATION ABOUT THE JOBS FROM THE QUEUE TO statJobs.txt
 print("Getting job info..")
-os.system("arcstat -a -S jobname > statJobs.txt")
+os.system("arcstat -a  > statJobs.txt")
 
 #GET A JOB LIST FROM THE CLUSTER WITH CURRENT JOB STATUS
 #allJobs is a list; allJobs[i]=[jobname, status]. allJobsToCompare is a list of just job names, and is as such directly comparable element by element to jobsToSend.
@@ -104,4 +96,5 @@ for i in range(len(allTypes)):
 
 print("Updated lists.")
 print("There is: {0} running, {1} queueing, {2} finished, {3} failed, {4} vanished and {5} saved jobs; for a total of {6} jobs."
-	.format(len(runningJobs), len(queueingJobs), len(finishedJobs), len(failedJobs), len(vanishedJobs), len(savedJobs), len(vanishedJobs)+len(savedJobs)+len(runningJobs)+len(queueingJobs)+len(finishedJobs)+len(failedJobs)))
+	.format(len(runningJobs), len(queueingJobs), len(finishedJobs), len(failedJobs), len(vanishedJobs), len(savedJobs), 
+		len(vanishedJobs)+len(savedJobs)+len(runningJobs)+len(queueingJobs)+len(finishedJobs)+len(failedJobs)))

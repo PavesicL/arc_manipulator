@@ -13,6 +13,9 @@ import itertools
 
 name, paramList = readNameFile("nameFile")
 
+print(name)
+print(paramList)
+
 #The required input is at least three values for the sweep parameters (min, max, step) and at least one value for the case parameters.
 smallestInputLen = 1 #start at 1 as len(sys.argv) is always at least 1 (sys.argv[0] is the name of the script)
 outputString = " "
